@@ -1,4 +1,4 @@
-package datastrcuctures
+package datastructures
 
 class LinkedList {
   var head: Option[Node] = None
@@ -116,7 +116,7 @@ class LinkedList {
   def reverse(): Unit = {
     var temp = head
     head = tail
-    tail = head
+    tail = temp
     var before: Option[Node] = None
     var after = temp
     for (_ <- 0 until length) 
@@ -142,7 +142,7 @@ object LinkedList {
     if (ll.length < 0) arr
     else
       while (current.isDefined) {
-        arr :+ current.get.value
+        arr = arr :+ current.get.value
         current = current.get.next
       }
     arr  

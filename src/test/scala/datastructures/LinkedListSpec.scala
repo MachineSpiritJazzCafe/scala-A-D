@@ -1,4 +1,4 @@
-package datastrcuctures
+package datastructures
 
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
@@ -245,6 +245,9 @@ class LinkedListSpec extends AnyFlatSpec with Matchers {
     testList.reverse()
 
     LinkedList.toArray(testList).sameElements(exampleArray)
+
+    testList.head.get.value shouldBe 5
+    testList.tail.get.value shouldBe 1
     
     testList.get(0).get.value shouldBe 5
     testList.get(1).get.value shouldBe 4

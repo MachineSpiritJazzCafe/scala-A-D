@@ -1,4 +1,4 @@
-package datastrcuctures
+package datastructures 
 
 case class Node(
   var value: Int, 
