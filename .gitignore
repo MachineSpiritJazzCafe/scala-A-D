@@ -1,0 +1,25 @@
+# Build artifacts
+target/
+project/target/
+project/project/
+
+# Metals/Bloop
+.metals/
+.bloop/
+.bsp/
+metals.sbt
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Scala/Java
+*.class
+*.log
+*.jar
+
+# OS
+.DS_Store
