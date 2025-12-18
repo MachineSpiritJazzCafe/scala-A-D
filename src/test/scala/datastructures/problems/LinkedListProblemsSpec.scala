@@ -51,4 +51,23 @@ class LinkedListProblemsSpec extends AnyFlatSpec with Matchers {
     
     LinkedListProblems.hasLoop(list) shouldBe true
   }
+
+  "findKthNode" should "return None from empty list" in {
+    val list = LinkedList.empty()
+
+    LinkedListProblems.findKthNode(list, 0) shouldBe None
+  }
+
+  it should "return None if k larger than list" in {
+    val list = LinkedList.fromArray(Array(1))
+
+    LinkedListProblems.findKthNode(list, 4) shouldBe None 
+  }
+
+  it should "return the kth element from end" in {
+    val list = LinkedList.fromArray(Array(1,2,3,4,5,6,7,8,9,10))
+
+    LinkedListProblems.findKthNode(list, 3).get.value shouldBe 8
+  }
+    
 } 

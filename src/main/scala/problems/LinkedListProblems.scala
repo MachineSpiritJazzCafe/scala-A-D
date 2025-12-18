@@ -53,7 +53,7 @@ object LinkedListProblems {
 
 
     /**
-   * Find Kth Node From End (Common Interview Question)
+   * Find Kth Node From End
    * Related: LeetCode 19: Remove Nth Node From End of List
    * https://leetcode.com/problems/remove-nth-node-from-end-of-list/
    * 
@@ -64,8 +64,16 @@ object LinkedListProblems {
    * Time Complexity: O(n)
    * Space Complexity: O(1)
    */
-  def findKthNode(k: Int): Option[Node] = {
-     ??? 
+  def findKthNode(list: LinkedList, k: Int): Option[Node] = k match {
+    case k if (k <= 0 || k > list.length) => None
+    case _ => 
+      var slow = list.head
+      var fast = list.get(k - 1)
+      while (fast.isDefined && fast.get.next.isDefined) {
+        slow = slow.flatMap(_.next)
+        fast = fast.flatMap(_.next)
+      }
+      slow
   }
 }
 
