@@ -50,5 +50,22 @@ object LinkedListProblems {
     }
     false
   }
+
+
+    /**
+   * Find Kth Node From End (Common Interview Question)
+   * Related: LeetCode 19: Remove Nth Node From End of List
+   * https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+   * 
+   * Given the head of a linked list, return the kth node from the end.
+   * If k is greater than the length of the list, return None.
+   * k is 1-indexed (k=1 means last node, k=2 means second-to-last).
+   * 
+   * Time Complexity: O(n)
+   * Space Complexity: O(1)
+   */
+  def findKthNode(k: Int): Option[Node] = {
+     ??? 
+  }
 }
 

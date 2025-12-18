@@ -45,6 +45,10 @@ class LinkedListProblemsSpec extends AnyFlatSpec with Matchers {
   }
   
   it should "return true if loop is present in the list" in {
+    val list = LinkedList.fromArray(Array(1,2,3,4,5))
+
+    list.tail.get.next = list.head
     
+    LinkedListProblems.hasLoop(list) shouldBe true
   }
 } 
