@@ -30,6 +30,21 @@ class LinkedListProblemsSpec extends AnyFlatSpec with Matchers {
     val list = LinkedList.fromArray(Array(1,2,3,4,5,6))
     val middle = LinkedListProblems.findMiddleNode(list)
     middle.get.value shouldBe 4
+  }
 
+  "HasLoop" should "return false for empty list" in {
+    val list = LinkedList.empty()
+
+    LinkedListProblems.hasLoop(list) shouldBe false
+  }
+
+  it should "return false if list has no loop" in {
+    val list = LinkedList.fromArray(Array(1,2,3,4,5))
+
+    LinkedListProblems.hasLoop(list) shouldBe false
+  }
+  
+  it should "return true if loop is present in the list" in {
+    
   }
 } 
