@@ -156,7 +156,12 @@ class LinkedListProblemsSpec extends AnyFlatSpec with Matchers {
       LinkedList.fromArray(Array(1,2,3,4)), 0)
 
     LinkedList.toArray(list1).toSeq shouldBe Seq(1,2,3,4)
+    list1.head.get.value shouldBe 1
+    list1.tail.get.value shouldBe 4
+   
     LinkedList.toArray(list2).toSeq shouldBe Seq(1,2,3,4)
+    list2.head.get.value shouldBe 1
+    list2.tail.get.value shouldBe 4
   }
   
   it should "partition at end" in {

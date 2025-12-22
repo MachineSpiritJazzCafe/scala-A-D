@@ -188,7 +188,7 @@ object LinkedListProblems {
      p1.next = d2.next
      
      ll.head = d1.next
-     ll.tail = Some(p2)
+     ll.tail = if (d2.next.isDefined) Some(p2) else Some(p1) 
      d1.next = None
      d2.next = None
      ll
