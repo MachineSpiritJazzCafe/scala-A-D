@@ -69,5 +69,53 @@ class LinkedListProblemsSpec extends AnyFlatSpec with Matchers {
 
     LinkedListProblems.findKthNode(list, 3).get.value shouldBe 8
   }
-    
+
+  "removeDuplicatesWithSet" should "return empty list such passed" in {
+    LinkedListProblems.removeDuplicatesWithSet(
+      LinkedList.empty()
+    ).length shouldBe 0 
+  }
+
+  it should "return unchanged list if no duplicates found" in {
+    LinkedListProblems.removeDuplicatesWithSet(
+      LinkedList.fromArray(Array(1,2,3))
+    ).length shouldBe 3
+  }
+
+  it should "remove one extra element" in {
+    LinkedList.toArray(LinkedListProblems.removeDuplicatesWithSet(
+      LinkedList.fromArray(Array(1,2,3, 1))
+    )).sameElements(Array(1,2,3))
+  }
+ 
+  it should "remove all extra elements" in {
+    LinkedList.toArray(LinkedListProblems.removeDuplicatesWithSet(
+      LinkedList.fromArray(Array(1,2,3,1,3,3,1,2,2,4))
+    )).sameElements(Array(1,2,3,4))
+  }
+
+
+  "removeDuplicatesInNsq" should "return empty list such passed" in {
+    LinkedListProblems.removeDuplicatesInNSq(
+      LinkedList.empty()
+    ).length shouldBe 0
+  }
+
+  it should "return unchanged list if no duplicates found" in {
+    LinkedListProblems.removeDuplicatesInNSq(
+      LinkedList.fromArray(Array(1,2,3))
+    ).length shouldBe 3
+  }
+
+  it should "remove one extra element" in {
+    LinkedList.toArray(LinkedListProblems.removeDuplicatesInNSq(
+      LinkedList.fromArray(Array(1,2,3, 1))
+    )).sameElements(Array(1,2,3))
+  }
+  
+  it should "remove all extra elements" in {
+    LinkedList.toArray(LinkedListProblems.removeDuplicatesWithSet(
+      LinkedList.fromArray(Array(1,2,3,1,3,3,1,2,2,4))
+    )).sameElements(Array(1,2,3,4))
+  }
 } 

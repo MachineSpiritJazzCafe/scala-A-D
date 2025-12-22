@@ -74,6 +74,58 @@ object LinkedListProblems {
         fast = fast.flatMap(_.next)
       }
       slow
+    }
+
+
+    /**
+   * Remove Duplicates from Unsorted Linked List
+   * Related: LeetCode 1836: Remove Duplicates From an Unsorted Linked List
+   * 
+   * Given the head of a linked list, remove all duplicate values.
+   * Keep only the first occurrence of each value.
+   * Example: 1 -> 2 -> 1 -> 3 -> 2 -> null becomes 1 -> 2 -> 3 -> null
+   * 
+   * Solution 1 (with buffer):
+   * Time Complexity: O(n)
+   * Space Complexity: O(n)
+   * 
+   * Solution 2 (without buffer):
+   * Time Complexity: O(n²)
+   * Space Complexity: O(1)
+   */
+  def removeDuplicatesWithSet(list: LinkedList): LinkedList = {
+    val set = scala.collection.mutable.Set.empty[Int]
+    
+    var curr = list.head
+    var prev: Option[Node] = None
+
+    while(curr.isDefined){
+     if (set.contains(curr.get.value))
+       prev.foreach(_.next = curr.get.next)
+     else
+       set.add(curr.get.value)
+       prev = curr
+      curr = curr.get.next
+    }
+    list
+  }
+
+  def removeDuplicatesInNSq(list: LinkedList) = {
+    var temp = list.head
+
+    while(temp.isDefined){
+      var preRunner = temp
+      var runner = temp.get.next
+      
+      while(runner.isDefined){
+        if (temp.get.value == runner.get.value)
+          preRunner.get.next = runner.flatMap(_.next) 
+        else
+          preRunner = runner  
+        runner = runner.flatMap(_.next)
+      }
+      temp = temp.get.next
+    }
+    list
   }
 }
-
