@@ -72,50 +72,117 @@ class LinkedListProblemsSpec extends AnyFlatSpec with Matchers {
 
   "removeDuplicatesWithSet" should "return empty list such passed" in {
     LinkedListProblems.removeDuplicatesWithSet(
-      LinkedList.empty()
-    ).length shouldBe 0 
+      LinkedList.empty()).length shouldBe 0 
   }
 
   it should "return unchanged list if no duplicates found" in {
     LinkedListProblems.removeDuplicatesWithSet(
-      LinkedList.fromArray(Array(1,2,3))
-    ).length shouldBe 3
+      LinkedList.fromArray(Array(1,2,3))).length shouldBe 3
   }
 
   it should "remove one extra element" in {
     LinkedList.toArray(LinkedListProblems.removeDuplicatesWithSet(
-      LinkedList.fromArray(Array(1,2,3, 1))
-    )).sameElements(Array(1,2,3))
+      LinkedList.fromArray(Array(1,2,3, 1))))
+        .sameElements(Array(1,2,3))
   }
  
   it should "remove all extra elements" in {
     LinkedList.toArray(LinkedListProblems.removeDuplicatesWithSet(
-      LinkedList.fromArray(Array(1,2,3,1,3,3,1,2,2,4))
-    )).sameElements(Array(1,2,3,4))
+      LinkedList.fromArray(Array(1,2,3,1,3,3,1,2,2,4))))
+        .sameElements(Array(1,2,3,4))
   }
 
 
   "removeDuplicatesInNsq" should "return empty list such passed" in {
     LinkedListProblems.removeDuplicatesInNSq(
-      LinkedList.empty()
-    ).length shouldBe 0
+      LinkedList.empty()).length shouldBe 0
   }
 
   it should "return unchanged list if no duplicates found" in {
     LinkedListProblems.removeDuplicatesInNSq(
-      LinkedList.fromArray(Array(1,2,3))
-    ).length shouldBe 3
+      LinkedList.fromArray(Array(1,2,3))).length shouldBe 3
   }
 
   it should "remove one extra element" in {
     LinkedList.toArray(LinkedListProblems.removeDuplicatesInNSq(
-      LinkedList.fromArray(Array(1,2,3, 1))
-    )).sameElements(Array(1,2,3))
+      LinkedList.fromArray(Array(1,2,3, 1)))).sameElements(Array(1,2,3))
   }
   
   it should "remove all extra elements" in {
     LinkedList.toArray(LinkedListProblems.removeDuplicatesWithSet(
-      LinkedList.fromArray(Array(1,2,3,1,3,3,1,2,2,4))
-    )).sameElements(Array(1,2,3,4))
+      LinkedList.fromArray(Array(1,2,3,1,3,3,1,2,2,4))))
+        .sameElements(Array(1,2,3,4))
+  }
+
+  "binaryToDecimal" should "return None for empty list" in {
+    LinkedListProblems.binaryToDecimal(
+      LinkedList.empty()) shouldBe None
+  }
+
+  it should "return 0 for 0" in {
+    LinkedListProblems.binaryToDecimal(
+      LinkedList.fromArray(Array(0))) shouldBe Some(0)
+  }
+
+  it should "return 1 for 1" in {
+    LinkedListProblems.binaryToDecimal(
+      LinkedList.fromArray(Array(1))) shouldBe Some(1)
+  }
+
+  it should "return 8 for 1000" in {
+    LinkedListProblems.binaryToDecimal(
+      LinkedList.fromArray(Array(1,0,0,0))) shouldBe Some(8)
+  }
+  
+  it should "return 13 for 1101" in {
+    LinkedListProblems.binaryToDecimal(
+      LinkedList.fromArray(Array(1,1,0,1))) shouldBe Some(13)
+  }
+  
+  it should "return 6 for 110" in {
+    LinkedListProblems.binaryToDecimal(
+      LinkedList.fromArray(Array(1,1,0))) shouldBe Some(6)
+  }
+
+  "partitionList" should "return empty list" in {
+    LinkedListProblems.partitionList(
+      LinkedList.empty(), 4).length shouldBe 0
+  }
+ 
+  it should "return the same list for all element < and > value" in {
+    val list1 = LinkedListProblems.partitionList(
+      LinkedList.fromArray(Array(1,2,3,4)), 5)
+    val list2 = LinkedListProblems.partitionList(
+      LinkedList.fromArray(Array(1,2,3,4)), 0)
+
+    LinkedList.toArray(list1).toSeq shouldBe Seq(1,2,3,4)
+    LinkedList.toArray(list2).toSeq shouldBe Seq(1,2,3,4)
+  }
+  
+  it should "partition at end" in {
+    val list = LinkedListProblems.partitionList(
+      LinkedList.fromArray(Array(1,2,3,4,5,0)), 5)
+
+    LinkedList.toArray(list).toSeq shouldBe Seq(1,2,3,4,0, 5)
+    list.head.get.value shouldBe 1
+    list.tail.get.value shouldBe 5
+  }
+
+  it should "partition at start" in {
+   val list = LinkedListProblems.partitionList(
+      LinkedList.fromArray(Array(5,1,2,3,4)), 5)
+
+    LinkedList.toArray(list).toSeq shouldBe Seq(1,2,3,4,5)
+    list.head.get.value shouldBe 1
+    list.tail.get.value shouldBe 5
+  }
+  
+  it should "partition in middle" in {
+    val list = LinkedListProblems.partitionList(
+      LinkedList.fromArray(Array(1,2,7,6,5,4,8,9)), 6)
+
+    LinkedList.toArray(list).toSeq shouldBe Seq(1,2,5,4,7,6,8,9)
+    list.head.get.value shouldBe 1
+    list.tail.get.value shouldBe 9
   }
 } 

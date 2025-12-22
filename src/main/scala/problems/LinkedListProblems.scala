@@ -128,4 +128,69 @@ object LinkedListProblems {
     }
     list
   }
+
+
+  /**
+ * Binary to Decimal Conversion
+ * Related: LeetCode 1017 (Convert to Base -2), General bit manipulation problems
+ * 
+ * Given a binary string (containing only '0' and '1'), convert it to decimal.
+ * Example: "1010" becomes 10, "1111" becomes 15, "10000000" becomes 128
+ * 
+ * Solution (fold left with accumulator):
+ * Time Complexity: O(n) where n is the length of the binary string
+ * Space Complexity: O(1)
+ */
+  def binaryToDecimal(ll: LinkedList): Option[Int] = {
+    var result = 0
+
+    var temp = ll.head
+    if (temp.isEmpty) return None
+    while(temp.isDefined)
+      result *= 2
+      if (temp.get.value == 1)
+        result += 1
+      temp = temp.get.next
+    Some(result)  
+  }
+ 
+  /**
+ * Partition List
+ * Related: LeetCode 86: Partition List
+ * 
+ * Partition linked list so all nodes < x come before nodes >= x.
+ * Preserve relative order of nodes in each partition.
+ * Example: 3->8->5->10->2->1, x=5 becomes 3->2->1->8->5->10
+ * 
+ * Solution (Two dummy nodes):
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
+ */
+  def partitionList(ll: LinkedList, value: Int): LinkedList = {
+    var d1 = Node(0, None)
+    var d2 = Node(0, None)
+    var p1 = d1 
+    var p2 = d2
+
+    var curr: Option[Node] = ll.head
+  
+    while(curr.isDefined)
+      val node = curr.get
+      if (node.value < value)
+        p1.next = Some(node)
+        p1 = node
+      else
+        p2.next = Some(node)
+        p2 = node
+      curr = node.next  
+    
+     p2.next = None
+     p1.next = d2.next
+     
+     ll.head = d1.next
+     ll.tail = Some(p2)
+     d1.next = None
+     d2.next = None
+     ll
+  }
 }
