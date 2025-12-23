@@ -225,4 +225,36 @@ object LinkedListProblems {
     dummy.next = None
     ll
   }
+
+  /**
+   * Swap Nodes in Pairs
+   * Related: LeetCode 24: Swap Nodes in Pairs
+   * 
+   * Swap every two adjacent nodes and return the head.
+   * Example: 1->2->3->4->5->6->7 becomes 2->1->4->3->6->5->7
+   * 
+   * Solution (Iterative with dummy node):
+   * Time Complexity: O(n)
+   * Space Complexity: O(1)
+   */
+  def swapPairs(ll: LinkedList): LinkedList = {
+    if (ll.head.isEmpty || ll.head.flatMap(_.next).isEmpty) return ll
+    
+    val dummy = Node(0, ll.head)
+    var prev: Option[Node] = Some(dummy)
+
+    while(prev.flatMap(_.next).isDefined &&
+          prev.flatMap(_.next).flatMap(_.next).isDefined)
+      
+      val first = prev.flatMap(_.next)
+      val second = first.flatMap(_.next)
+      
+      first.foreach(_.next = second.flatMap(_.next))
+      second.foreach(_.next = first)
+      prev.foreach(_.next = second)
+      prev = first
+    
+    ll.head = dummy.next
+    ll  
+  }
 }

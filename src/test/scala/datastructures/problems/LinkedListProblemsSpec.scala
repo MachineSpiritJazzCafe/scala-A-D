@@ -229,4 +229,39 @@ class LinkedListProblemsSpec extends AnyFlatSpec with Matchers {
     LinkedList.toArray(list).toSeq shouldBe Seq(1,2,3,7,6,5,4,8,9)
     list.head.get.value shouldBe 1
   }
+
+  "swapPairs" should "return empty list" in {
+    val list = LinkedListProblems.swapPairs(LinkedList.empty())
+    LinkedList.toArray(list).toSeq shouldBe Seq()
+    list.head shouldBe None
+  }
+  
+  it should "return list with a single element unchanged" in {
+    val list = LinkedListProblems.swapPairs(
+      LinkedList.fromArray(Array(1)))
+
+    LinkedList.toArray(list).toSeq shouldBe Seq(1)
+    list.head.get.value shouldBe 1
+  }
+  
+  it should "swap elements in 2 elements list" in {
+    val list = LinkedListProblems.swapPairs(
+      LinkedList.fromArray(Array(1,2)))
+
+    LinkedList.toArray(list).toSeq shouldBe Seq(2,1)
+  }
+  
+  it should "swap all elements in even list" in {
+    val list = LinkedListProblems.swapPairs(
+      LinkedList.fromArray(Array(1,2,3,4,5,6)))
+
+    LinkedList.toArray(list).toSeq shouldBe Seq(2,1,4,3,6,5)
+  }
+
+  it should "swap all elements in an odd list and leave last at the end" in {
+    val list = LinkedListProblems.swapPairs(
+      LinkedList.fromArray(Array(1,2,3,4,5,6,7)))
+
+    LinkedList.toArray(list).toSeq shouldBe Seq(2,1,4,3,6,5,7)
+  }
 } 
