@@ -193,4 +193,36 @@ object LinkedListProblems {
      d2.next = None
      ll
   }
+
+  /**
+   * Reverse Between
+   * Related: LeetCode 92: Reverse Linked List II
+   * 
+   * Reverse nodes from start_index to end_index (inclusive, 0-indexed).
+   * Example: 1->2->3->4->5, start=2, end=4 becomes 1->2->5->4->3
+   * 
+   * Solution (One pass with dummy node):
+   * Time Complexity: O(n)
+   * Space Complexity: O(1)
+   */
+  def reverseBetween(ll: LinkedList, sIdx: Int, eIdx: Int): LinkedList = {
+    var dummy: Node = Node(0, ll.head)
+    var pre: Option[Node] = Some(dummy)
+    
+    (0 until sIdx).foreach { _ =>
+      pre = pre.flatMap(_.next)
+    }
+
+    var curr = pre.flatMap(_.next)
+    
+    (1 to (eIdx - sIdx)).foreach{ _ =>
+      val toMove = curr.flatMap(_.next)
+      curr.foreach(_.next = toMove.flatMap(_.next))
+      toMove.foreach(_.next = pre.flatMap(_.next))
+      pre.foreach(_.next = toMove)
+    }
+    ll.head = dummy.next
+    dummy.next = None
+    ll
+  }
 }
