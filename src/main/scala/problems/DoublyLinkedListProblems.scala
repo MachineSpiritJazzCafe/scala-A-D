@@ -28,5 +28,30 @@ object DoublyLinkedListProblems {
         isPalindrome
       }
     }
+
+ /**
+ * Reverse Doubly Linked List
+ * Related: LeetCode 206: Reverse Linked List (adapted for DLL)
+ * 
+ * Reverse a doubly linked list in place by swapping next and prev pointers.
+ * Example: 1<->2<->3<->4<->5 becomes 5<->4<->3<->2<->1
+ * 
+ * Solution (Swap next and prev pointers):
+ * Time Complexity: O(n)
+ * Space Complexity: O(1)
+ */
+  def reverse(dll: DoublyLinkedList): DoublyLinkedList = {
+    var temp = dll.head
+    while(temp.isDefined)
+      val pre = temp.get.prev
+      val next = temp.get.next
+      temp.foreach(_.prev = next)
+      temp.foreach(_.next = pre)
+      temp = next
+    val oldHead = dll.head
+    dll.head = dll.tail
+    dll.tail = oldHead
+    dll
+  }
 }
 
