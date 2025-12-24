@@ -108,5 +108,80 @@ class DoublyLinkedListProblemsSpec extends AnyFlatSpec with Matchers {
     list.head.get.value shouldBe 1
     list.tail.get.value shouldBe 9
   }
+
+  "reverseBetween" should "return empty list" in {
+    val list = DoublyLinkedListProblems.reverseBetween(
+      DoublyLinkedList.empty(), 1,5)
+
+    list.head shouldBe None
+  }
+  
+  it should "reverse two element list" in {
+    val list = DoublyLinkedListProblems.reverseBetween(
+      DoublyLinkedList.fromArray(Array(1,2)), 0, 1)
+    
+    DoublyLinkedList.toArray(list).toSeq shouldBe Seq(2,1)
+    list.head.get.value shouldBe 2
+  }
+
+  it should "return list with 1 element" in {
+    val list = DoublyLinkedListProblems.reverseBetween(
+      DoublyLinkedList.fromArray(Array(1)), 1, 3)
+    
+    DoublyLinkedList.toArray(list).toSeq shouldBe Seq(1)
+    list.head.get.value shouldBe 1
+  }
+
+  it should "reverse whole list" in {
+    val list = DoublyLinkedListProblems.reverseBetween(
+      DoublyLinkedList.fromArray(Array(1,2,3,4,5)), 0, 4)
+    
+    DoublyLinkedList.toArray(list).toSeq shouldBe Seq(5,4,3,2,1)
+    list.head.get.value shouldBe 5
+  }
+
+  it should "reverse in middle" in {
+    val list = DoublyLinkedListProblems.reverseBetween(
+      DoublyLinkedList.fromArray(Array(1,2,3,4,5,6,7,8,9)), 3, 6)
+
+    DoublyLinkedList.toArray(list).toSeq shouldBe Seq(1,2,3,7,6,5,4,8,9)
+    list.head.get.value shouldBe 1
+  }
+
+  "swapPairs" should "return empty list" in {
+    val list = DoublyLinkedListProblems.swapPairs(DoublyLinkedList.empty())
+    list.head shouldBe None
+    list.length shouldBe 0
+  }
+
+  it should "return list with a single element unchanged" in {
+    val list = DoublyLinkedListProblems.swapPairs(
+      DoublyLinkedList.fromArray(Array(1)))
+
+    DoublyLinkedList.toArray(list).toSeq shouldBe Seq(1)
+    list.head.get.value shouldBe 1
+  }
+
+  it should "swap elements in 2 elements list" in {
+    val list = DoublyLinkedListProblems.swapPairs(
+      DoublyLinkedList.fromArray(Array(1,2)))
+
+    DoublyLinkedList.toArray(list).toSeq shouldBe Seq(2,1)
+  }
+
+  it should "swap all elements in even list" in {
+    val list = DoublyLinkedListProblems.swapPairs(
+      DoublyLinkedList.fromArray(Array(1,2,3,4,5,6)))
+
+    DoublyLinkedList.toArray(list).toSeq shouldBe Seq(2,1,4,3,6,5)
+  }
+
+  it should "swap all elements in an odd list and leave last at the end" in {
+    val list = DoublyLinkedListProblems.swapPairs(
+      DoublyLinkedList.fromArray(Array(1,2,3,4,5,6,7)))
+
+    DoublyLinkedList.toArray(list).toSeq shouldBe Seq(2,1,4,3,6,5,7)
+  }
+
 }
 
