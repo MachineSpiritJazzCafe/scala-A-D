@@ -53,5 +53,48 @@ object DoublyLinkedListProblems {
     dll.tail = oldHead
     dll
   }
+
+  
+  /**
+   * Partition Doubly Linked List
+   * Related: LeetCode 86: Partition List (adapted for DLL)
+   * 
+   * Partition list so all nodes < x come before nodes >= x.
+   * Preserve relative order of nodes in each partition.
+   * Example: 3<->8<->5<->10<->2<->1, x=5 becomes 3<->2<->1<->8<->5<->10
+   * 
+   * Solution (Two dummy nodes):
+   * Time Complexity: O(n)
+   * Space Complexity: O(1)
+   */
+  def partition(dll: DoublyLinkedList, x: Int): DoublyLinkedList = {
+    val d1 = BiNode(0)
+    val d2 = BiNode(0)
+    var d1p: Option[BiNode] = Some(d1) 
+    var d2p: Option[BiNode] = Some(d2)
+    var temp = dll.head
+
+    while (temp.isDefined) {
+      if (temp.get.value < x) {
+        d1p.foreach(_.next = temp)
+        temp.foreach(_.prev = d1p)
+        d1p = d1p.flatMap(_.next)
+      } else {
+        d2p.foreach(_.next = temp)
+        temp.foreach(_.prev = d2p)
+        d2p = d2p.flatMap(_.next)
+      }
+      temp = temp.flatMap(_.next)
+    }
+    
+    d2p.foreach(_.next = None)
+    d1p.foreach(_.next = d2.next)
+    d2.next.foreach(_.prev = d1p)
+    
+    dll.head = d1.next
+    dll.head.foreach(_.prev = None)
+    dll.tail = if (d2.next.isDefined) d2p else d1p
+    dll
+  }
 }
 
