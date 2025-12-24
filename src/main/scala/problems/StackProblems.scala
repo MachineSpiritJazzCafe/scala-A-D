@@ -41,4 +41,28 @@ object StackProblems {
     .toSeq
   }
 
+  /**
+ * Is Balanced (Numbers)
+ * Check if a list of numbers is balanced (mirror/palindrome check using stack)
+ * 
+ * Split list in half, push first half onto stack, then compare with second half.
+ * Example: List(1, 2, 3, 3, 2, 1) is balanced, List(1, 2, 3, 4) is not
+ * 
+ * Solution (Stack-based):
+ * Time Complexity: O(n)
+ * Space Complexity: O(n/2) = O(n)
+ */
+  def isBalanced(list: Seq[Int]): Boolean = {
+    if (list.length %2 != 0) false
+    else
+      var stack = Stack.empty()
+      val (first, second) = list.splitAt(list.length / 2)
+
+      first.foreach(stack.push(_))
+      
+      second.forall{ sec =>
+        stack.pop().map(_.value == sec)
+          .exists(identity)
+      }
+  }
 }
