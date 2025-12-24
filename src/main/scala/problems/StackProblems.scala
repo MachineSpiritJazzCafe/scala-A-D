@@ -28,4 +28,17 @@ object StackProblems {
     }
     result
   }
+
+  /** Another version using Iterator */
+  def reverseListF(list: Seq[Int]): Seq[Int] = {
+  val stack = Stack.empty()
+  list.foreach(stack.push(_))
+  
+  Iterator.continually(stack.pop())
+    .takeWhile(_.isDefined)
+    .flatten
+    .map(_.value)
+    .toSeq
+  }
+
 }
