@@ -38,7 +38,7 @@ class QueueSpec extends AnyFlatSpec with Matchers {
     queue.first shouldBe None
   }
 
-  it should "enqueue and dequeue following LIFO" in {
+  it should "enqueue and dequeue following FIFO" in {
    val queue = Queue.empty()
 
    queue.enqueue(1)
