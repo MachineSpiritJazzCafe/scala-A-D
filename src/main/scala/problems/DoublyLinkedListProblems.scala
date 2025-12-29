@@ -1,6 +1,7 @@
 package problems
 
 import datastructures.{DoublyLinkedList, BiNode}
+import java.nio.channels.NonWritableChannelException
 
 object DoublyLinkedListProblems {
 
@@ -122,7 +123,7 @@ object DoublyLinkedListProblems {
     }
     
     var curr = pre.flatMap(_.next)
-
+ 
     // Reverse from sIdx to eIdx
     (0 until (eIdx - sIdx)).foreach { _ =>
       val toMove = curr.flatMap(_.next)

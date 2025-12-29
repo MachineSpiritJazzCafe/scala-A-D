@@ -24,6 +24,10 @@ class Stack {
       println(temp.get.value)
       temp = temp.flatMap(_.next)  
   }
+
+  def isEmpty: Boolean = height == 0
+
+  def peek: Option[Int] = top.map(_.value)
 }
 
 object Stack {

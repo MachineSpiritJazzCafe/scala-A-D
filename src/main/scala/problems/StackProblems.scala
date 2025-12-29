@@ -65,4 +65,34 @@ object StackProblems {
           .exists(identity)
       }
   }
+
+  /**
+ * Sort Stack (Using Two Stacks)
+ * Sort a stack in ascending order (smallest on top) using only one additional stack
+ * 
+ * Pop elements from input stack, insert each into correct sorted position in temp stack.
+ * If popped element < temp.top, temporarily move temp elements back to input stack.
+ * Example: Stack(3, 1, 4, 2) → Stack(1, 2, 3, 4) (top to bottom, ascending)
+ * 
+ * Solution (Two-stack insertion sort):
+ * Time Complexity: O(n²) - worst case each insert requires n comparisons
+ * Space Complexity: O(n) - temporary stack holds up to n elements
+ */
+  def sort(stack: Stack): Stack = {
+    val hs = Stack.empty()
+
+
+    while (!stack.isEmpty){
+      val temp = stack.pop()
+
+      while (!hs.isEmpty && hs.peek.map(_ > temp.get.value).exists(identity))
+        hs.pop().foreach(n => stack.push(n.value))
+      
+      hs.push(temp.get.value)
+    }   
+    
+    while (!hs.isEmpty)
+      hs.pop().foreach(n => stack.push(n.value))
+    stack  
+  }
 }

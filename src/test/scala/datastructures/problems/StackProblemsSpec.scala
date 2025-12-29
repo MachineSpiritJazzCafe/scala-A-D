@@ -47,5 +47,30 @@ class StackProblemsSpec extends AnyFlatSpec with Matchers {
       .isBalanced(Seq(1,2,3,3,2,1)) shouldBe true
   }
 
+  "Reverse" should "return empty stack" in {
+    StackProblems.sort(Stack.empty()).isEmpty shouldBe true
+  }
+  
+  it should "return single element without change" in {
+    val res = StackProblems.sort(Stack.fromArray(Array(1)))
+    
+    res.height shouldBe 1
+    res.top.get.value shouldBe 1
+  }
+      
+  it should "return storted stack" in {
+    val res = StackProblems.sort(Stack.fromArray(Array(3,2,1)))
+    Stack.toArray(res).toSeq sameElements Seq(3,2,1)
+  }
+
+  it should "sort stack with 2 elements" in {
+    val res = StackProblems.sort(Stack.fromArray(Array(1,2)))
+    Stack.toArray(res).toSeq sameElements Seq(2,1)
+  }
+
+  it should "sort non empty stack" in {
+    val res = StackProblems.sort(Stack.fromArray(Array(1,5,3,2,5)))
+    Stack.toArray(res).toSeq sameElements Seq(6,5,3,2,1)
+  } 
 }
 
